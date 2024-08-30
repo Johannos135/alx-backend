@@ -5,20 +5,20 @@ const client = createClient();
 const get = promisify(client.get).bind(client);
 
 client.on('error', (err) => {
- console.log(`Redis client not connected to the server: ${err}`);
- client.quit();
+  console.log(`Redis client not connected to the server: ${err}`);
+  client.quit();
 });
 
 client.on("connect", () => {
- console.log("Redis client connected to the server");
+  console.log("Redis client connected to the server");
 });
 
 function setNewSchool(schoolName, value) {
- client.set(schoolName, value, print);
+  client.set(schoolName, value, print);
 }
 
 async function displaySchoolValue(schoolName) {
- const value = await get(schoolName);
+  const value = await get(schoolName);
   if (value) console.log(value);
 }
 
